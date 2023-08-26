@@ -1,10 +1,11 @@
 from menu import MENU, resources
+import math
 
 water = resources["water"]
 milk = resources["milk"]
 coffee = resources["coffee"]
 
-money = 0
+
 
 espresso_price = MENU["espresso"]["cost"]
 latte_price = MENU["latte"]["cost"]
@@ -13,6 +14,7 @@ cappuccino_price = MENU["cappuccino"]["cost"]
 
 # Flag to indicate that coffee machine is off or on
 machine_off = False
+money_inside = False
 
 # 1. Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
 response = input(f"What would you like? (espresso/latte/cappuccino): ").lower()
@@ -32,6 +34,8 @@ def print_report(resources):
     milk = resources["milk"]
     coffee = resources["coffee"]
     print(f"\nWater: {water}ml \nMilk: {milk}ml \nCoffee: {coffee}g")
+    if money_inserted:
+        print(f"Money: {cost}")
 
 # If you type "report" as response, it will print the resource values
 if response == "report":
@@ -53,6 +57,7 @@ if response == "espresso":
         elif espresso_coffee < coffee:
             water -= espresso_water
             coffee -= espresso_coffee
+            cost = espresso_price
 
 # Latte
 latte_water = MENU["latte"]["ingredients"]["water"]
@@ -72,6 +77,7 @@ if response == "latte":
                 water -= latte_water
                 milk -= latte_milk
                 coffee -= latte_coffee
+                cost = latte_price
 
 # Cappuccino
 cappuccino_water = MENU["cappuccino"]["ingredients"]["water"]
@@ -91,6 +97,7 @@ if response == "cappuccino":
                 water -= cappuccino_water
                 milk -= cappuccino_milk
                 coffee -= cappuccino_coffee
+                cost = cappuccino_price
 
 
     
@@ -100,18 +107,33 @@ print(f"Water {water}, Milk {milk}, Coffee {coffee}")
 
 
 # 5. Process coins.
+# Ask how much coins you want to insert
 print(f"Please insert coins.")
 ask_quarter = int(input(f"how many quarters?: "))
 ask_dime = int(input(f"how many dimes?: "))
 ask_nickel = int(input(f"how many nickels?: "))
 ask_penny = int(input(f"how many pennies?: "))
 
+# Coin conversion
 quarter_total = .25 * ask_quarter
 dime_total = .10 * ask_dime
 nickel_total = .05 * ask_nickel
 penny_total = .01 * ask_penny
 
-money_total = quarter_total + dime_total + nickel_total + penny_total
+# Get the total amount of coins inserted
+money_inserted = quarter_total + dime_total + nickel_total + penny_total
+# If there is money inserted in the machine, the amount will show up when "report" is typed
+if money_inserted > 0:
+    money_inside = True
+
+
+if cost > money_inserted:
+    print("Sorry that's not enough money. Money refunded.")
+    machine_off = True
+# If user overpays, user will get a refund
+elif cost < money_inserted:
+    user_change = money_inserted - cost
+    print(f"Here is ${user_change:.2f} dollars in change.")
 
 
 
