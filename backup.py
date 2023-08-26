@@ -19,38 +19,31 @@ money_inside = False
 # Start While Loop Here
 # =================================================================
 while not machine_off:
-    report = True
 
-    while report:
+    # 1. Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
+    response = input(f"  What would you like? (espresso/latte/cappuccino): ").lower()
+    # print(response)
 
-        # 1. Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
-        response = input(f"  What would you like? (espresso/latte/cappuccino): ").lower()
-        # print(response)
-
-        # 3. Print report.
-        # When user enters "report", it should show the current resource values
-        # Function that prints the current resource values
-
-        def print_report(resources):
-            water = resources["water"]
-            milk = resources["milk"]
-            coffee = resources["coffee"]
-            if not money_inside:
-                print(f"\nWater: {water}ml \nMilk: {milk}ml \nCoffee: {coffee}g\n")
-            elif money_inside:
-                print(f"\nWater: {water}ml \nMilk: {milk}ml \nCoffee: {coffee}g\n")
-                print(f"Money: {cost}")
-                
-        # If you type "report" as response, it will print the resource values
-        if response == "report":
-            print_report(resources)
-        else:
-            break
-            
     # 2. Turn off the Coffee Machine by entering “off” to the prompt.
     # Input "off" to turn off coffee machine (secret word)
-    if response == "off":
-        break
+    # if response == "off":
+    #     machine_off = True
+
+    # 3. Print report.
+    # When user enters "report", it should show the current resource values
+    # Function that prints the current resource values
+
+    def print_report(resources):
+        water = resources["water"]
+        milk = resources["milk"]
+        coffee = resources["coffee"]
+        print(f"\nWater: {water}ml \nMilk: {milk}ml \nCoffee: {coffee}g")
+        if money_inside:
+            print(f"Money: {cost}")
+            
+    # If you type "report" as response, it will print the resource values
+    if response == "report":
+        print_report(resources)
 
 
     # 4. Check resources sufficient?
@@ -62,11 +55,9 @@ while not machine_off:
     if response == "espresso":
         if espresso_water > water:
             print(f"Sorry there is not enough water.")
-            break
         elif espresso_water < water:
             if espresso_coffee > coffee:
                 print(f"Sorry there is not enough water.")
-                break
             elif espresso_coffee < coffee:
                 water -= espresso_water
                 coffee -= espresso_coffee
@@ -80,15 +71,12 @@ while not machine_off:
     if response == "latte":
         if latte_water > water:
             print(f"Sorry there is not enough water.")
-            break
         elif latte_water < water:
             if latte_milk > milk:
                 print(f"Sorry there is not enough milk.")
-                break
             elif latte_milk < milk:
                 if latte_coffee > coffee:
                     print(f"Sorry there is not enough coffee.")
-                    break
                 elif latte_coffee < coffee:
                     water -= latte_water
                     milk -= latte_milk
@@ -103,15 +91,12 @@ while not machine_off:
     if response == "cappuccino":
         if cappuccino_water > water:
             print(f"Sorry there is not enough water.")
-            break
         elif cappuccino_water < water:
             if cappuccino_milk > milk:
                 print(f"Sorry there is not enough milk.")
-                break
             elif cappuccino_milk < milk:
                 if cappuccino_coffee > coffee:
                     print(f"Sorry there is not enough coffee.")
-                    break
                 elif cappuccino_coffee < coffee:
                     water -= cappuccino_water
                     milk -= cappuccino_milk
@@ -119,14 +104,19 @@ while not machine_off:
                     cost = cappuccino_price
 
 
+        
+
+    print(f"Water {water}, Milk {milk}, Coffee {coffee}")
+
+
 
     # 5. Process coins.
     # Ask how much coins you want to insert
-    print(f"\nPlease insert coins.")
-    ask_quarter = int(input(f"  how many quarters?: "))
-    ask_dime = int(input(f"  how many dimes?: "))
-    ask_nickel = int(input(f"  how many nickels?: "))
-    ask_penny = int(input(f"  how many pennies?: "))
+    print(f"Please insert coins.")
+    ask_quarter = int(input(f"how many quarters?: "))
+    ask_dime = int(input(f"how many dimes?: "))
+    ask_nickel = int(input(f"how many nickels?: "))
+    ask_penny = int(input(f"how many pennies?: "))
 
     # Coin conversion
     quarter_total = .25 * ask_quarter
@@ -149,11 +139,11 @@ while not machine_off:
     # If user overpays, user will get a refund
     elif cost < money_inserted:
         user_change = money_inserted - cost
-        print(f"\nHere is ${user_change:.2f} dollars in change.")
+        print(f"Here is ${user_change:.2f} dollars in change.")
 
 
     # 7. Make Coffee.
-    print(f"Here is your {response} ☕. Enjoy!\n")
+    print(f"Here is your {response} ☕. Enjoy!")
 
 
 
