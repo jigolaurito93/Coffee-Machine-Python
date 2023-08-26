@@ -103,8 +103,16 @@ print(f"Water {water}, Milk {milk}, Coffee {coffee}")
 print(f"Please insert coins.")
 ask_quarter = int(input(f"how many quarters?: "))
 ask_dime = int(input(f"how many dimes?: "))
-ask_nickle = int(input(f"how many nickels?: "))
+ask_nickel = int(input(f"how many nickels?: "))
 ask_penny = int(input(f"how many pennies?: "))
+
+quarter_total = .25 * ask_quarter
+dime_total = .10 * ask_dime
+nickel_total = .05 * ask_nickel
+penny_total = .01 * ask_penny
+
+money_total = quarter_total + dime_total + nickel_total + penny_total
+
 
 
 
