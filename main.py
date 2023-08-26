@@ -67,9 +67,31 @@ if response == "latte":
                 water -= latte_water
                 milk -= latte_milk
                 coffee -= latte_coffee
+
+# Cappuccino
+cappuccino_water = MENU["cappuccino"]["ingredients"]["water"]
+cappuccino_milk = MENU["cappuccino"]["ingredients"]["milk"]
+cappuccino_coffee = MENU["cappuccino"]["ingredients"]["coffee"]
+
+if response == "cappuccino":
+    if cappuccino_water > water:
+        print(f"Sorry there is not enough water.")
+    elif cappuccino_water < water:
+        if cappuccino_milk > milk:
+            print(f"Sorry there is not enough milk.")
+        elif cappuccino_milk < milk:
+            if cappuccino_coffee > coffee:
+                print(f"Sorry there is not enough coffee.")
+            elif cappuccino_coffee < coffee:
+                water -= cappuccino_water
+                milk -= cappuccino_milk
+                coffee -= cappuccino_coffee
+
+
     
 
-print(f"Water {water}, Coffee {coffee}")
+print(f"Water {water}, Milk {milk}, Coffee {coffee}")
+
 
 
 # 5. Process coins.
