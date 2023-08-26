@@ -49,6 +49,26 @@ if response == "espresso":
             water -= espresso_water
             coffee -= espresso_coffee
 
+# Latte
+latte_water = MENU["latte"]["ingredients"]["water"]
+latte_milk = MENU["latte"]["ingredients"]["milk"]
+latte_coffee = MENU["latte"]["ingredients"]["coffee"]
+
+if response == "latte":
+    if latte_water > water:
+        print(f"Sorry there is not enough water.")
+    elif latte_water < water:
+        if latte_milk > milk:
+            print(f"Sorry there is not enough milk.")
+        elif latte_milk < milk:
+            if latte_coffee > coffee:
+                print(f"Sorry there is not enough coffee.")
+            elif latte_coffee < coffee:
+                water -= latte_water
+                milk -= latte_milk
+                coffee -= latte_coffee
+    
+
 print(f"Water {water}, Coffee {coffee}")
 
 
