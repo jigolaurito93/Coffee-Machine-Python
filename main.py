@@ -6,6 +6,11 @@ coffee = resources["coffee"]
 
 money = 0
 
+espresso_price = MENU["espresso"]["cost"]
+latte_price = MENU["latte"]["cost"]
+cappuccino_price = MENU["cappuccino"]["cost"]
+
+
 # Flag to indicate that coffee machine is off or on
 machine_off = False
 
@@ -95,6 +100,14 @@ print(f"Water {water}, Milk {milk}, Coffee {coffee}")
 
 
 # 5. Process coins.
+print(f"Please insert coins.")
+ask_quarter = int(input(f"how many quarters?: "))
+ask_dime = int(input(f"how many dimes?: "))
+ask_nickle = int(input(f"how many nickels?: "))
+ask_penny = int(input(f"how many pennies?: "))
+
+
+
 
 # 6.  Check transaction successful?
 
